@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>পথিক - আপনার ভ্রমণের সঙ্গী</title>
+    <link rel="stylesheet" href="/assest/css/style.css">
+</head>
+<body>
+
+    <div class="hero-container">
+
+        <div class="top-nav">
+            <button id="auth-btn" class="auth-btn" onclick="toggleAuth()">Login</button>
+        </div>
+        <div class="overlay"></div>
+        
+        <div class="hero-content">
+            <img src="/assest/image/ChatGPT Image Jan 14, 2026, 08_27_45 PM.png" alt="Pathik Logo" class="main-logo">
+            <p class="tagline">আপনার প্রতিটি পথ হোক আনন্দময়</p>
+        </div>
+
+        <div class="bottom-menu">
+            <button class="menu-btn" onclick="showSection('planner')">💰 বাজেট প্ল্যান</button>
+            <button class="menu-btn" onclick="showSection('places')">🏔️ সেরা জায়গা</button>
+            <button class="menu-btn" onclick="showSection('guide')">📞 জরুরি তথ্য</button>
+        </div>
+    </div>
+
+    <div id="info-display" class="info-section">
+        <div class="handle" onclick="hideSection()"></div>
+        <button class="close-btn" onclick="hideSection()">✖</button>
+        <div id="content-area">
+            </div>
+    </div>
+    <footer class="main-footer">
+    <div class="footer-links">
+        <a href="#">Privacy policy</a>
+        <a href="#">Terms and conditions</a>
+        <a href="#">About Us</a>
+    </div>
+    <p>© পথিক - Made by "Swadhin K Tanmoy"</p>
+    <div class="social-icons">
+        <!-- <span>🌐</span> <span>🔵</span> <span>📸</span> </div> -->
+</footer>
+
+    <script src="/assest/js/style.js"></script>
+</body>
+</html>

@@ -3,24 +3,20 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, sans-serif;
-    overflow-x: hidden; /* স্ক্রিন যাতে ডানে-বামে না নড়ে */
-    background-color: #2c3e50; /* ইমেজ লোড হওয়ার আগ পর্যন্ত ব্যাকগ্রাউন্ড কালার */
+    overflow: hidden; 
 }
 
 /* ২. মেইন কন্টেইনার */
 .hero-container {
     height: 100vh;
     width: 100%;
-    /* পাথ থেকে শুরুর স্লাশ (/) বাদ দেওয়া হয়েছে এবং নামের স্পেসগুলো %20 দিয়ে ফিল করা হয়েছে */
-    background-image: url("assest/image/ChatGPT%20Image%20Jan%2014,%202026,%2007_26_13%20PM.png"); 
+    background-image: url("assest/image/ChatGPT Image Jan 14, 2026, 07_26_13 PM.png"); 
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
 .overlay {
@@ -28,103 +24,172 @@ body {
     top: 0; left: 0;
     width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.4); 
-    z-index: 1;
 }
 
-/* ৩. লোগো ও ট্যাগলাইন */
-.hero-content {
-    z-index: 2;
-    text-align: center;
+.hero-container {
+    height: 100vh;
     width: 100%;
+    /* পাথ আপডেট করা হয়েছে এবং স্পেস সম্বলিত নাম ঠিকভাবে হ্যান্ডেল করা হয়েছে */
+    background-image: url("/assest/image/ChatGPT Image Jan 14, 2026, 07_26_13 PM.png"); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: #000; /* ইমেজ লোড না হওয়া পর্যন্ত কালো দেখাবে */
+}
+/* মোবাইলে যাতে কন্টেন্ট ঠিক থাকে */
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto; /* মোবাইলে স্ক্রল করার সুবিধা দিন */
+    }
+    .hero-container {
+        height: auto;
+        min-height: 100vh;
+    }
 }
 
 .main-logo {
-    width: 85%;
-    max-width: 450px;
+    width: 90%;
+    max-width: 500px;
     height: auto;
-    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.2));
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+    
+    /* লোগো এখন উপর থেকে নিচে নামবে */
     animation: logoFadeIn 1.5s ease-out; 
     margin-bottom: 20px; 
 }
 
+/* লোগোর জন্য নতুন অ্যানিমেশন (উপর থেকে নিচে) */
 @keyframes logoFadeIn {
     from { opacity: 0; transform: translateY(-30px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 .tagline {
-    color: #f1c40f; /* সোনালী/হলুদ ফন্ট যা ছবির ওপর ফুটে উঠবে */
-    font-size: 22px;
+    /* Absolute পজিশন সরিয়ে দেওয়া হয়েছে যাতে পাশে সরে না যায় */
+    color: rgba(236, 191, 107, 0.836);
+    font-size: 24px;
     font-weight: 500;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+    text-shadow: 2px 2px 12px rgba(224, 41, 41, 0.9);
+    z-index: 2;
+    
+    /* ট্যাগলাইন নিচ থেকে উপরে আলতো করে উঠবে */
     animation: taglineFadeIn 2s ease-out;
 }
 
+/* ট্যাগলাইনের জন্য আলাদা অ্যানিমেশন */
 @keyframes taglineFadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* মোবাইলের জন্য ট্যাগলাইন ফন্ট অ্যাডজাস্টমেন্ট */
+@media (max-width: 768px) {
+    .tagline {
+        font-size: 18px;
+        padding: 0 20px;
+    }
+}
 /* ৪. বাটন মেনু */
 .bottom-menu {
     position: absolute;
-    bottom: 80px;
+    bottom: 70px; /* ফুটারের ঠিক উপরে */
     display: flex;
     gap: 15px;
     z-index: 2;
 }
 
 .menu-btn {
-    padding: 12px 20px;
+    padding: 12px 25px;
+    border: none;
     border-radius: 50px;
     background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(15px);
     color: white;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.menu-btn:hover { 
-    background: #2ecc71; 
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
-}
+.menu-btn:hover { background: #2ecc71; transform: translateY(-3px); }
 
 /* ৫. ফুটার ডিজাইন */
 .main-footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    padding: 15px;
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    color: white;
+    padding: 12px 10%;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    color: rgba(255, 255, 255, 0.8);
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    font-size: 11px;
+    font-size: 12px;
     z-index: 3;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* ৬. মোবাইল রেসপনসিভ */
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+}
+
+/* ৬. মোবাইল রেসপনসিভ লজিক */
 @media (max-width: 768px) {
-    .main-logo { max-width: 280px; }
-    .tagline { font-size: 16px; padding: 0 15px; }
+    .main-logo { max-width: 320px; }
+    
+    .tagline {
+        bottom: 250px; /* মোবাইলে বাটনের তালিকা লম্বা হওয়ায় ট্যাগলাইন উপরে সরানো হলো */
+        font-size: 16px;
+        width: 90%;
+        text-align: center;
+    }
+
     .bottom-menu {
         flex-direction: column;
-        bottom: 100px;
-        width: 80%;
+        width: 85%;
+        bottom: 75px; /* ফুটারের ঠিক উপরে বাটনগুলো থাকবে */
         gap: 10px;
     }
-    .menu-btn { width: 100%; }
-    .main-footer { flex-direction: column; text-align: center; gap: 5px; }
+
+    .menu-btn { width: 100%; padding: 10px; }
+
+    .main-footer {
+        flex-direction: column;
+        gap: 8px;
+        padding: 10px;
+        text-align: center;
+    }
 }
+
+/* ৭. ইনফো প্যানেল ও এআই কার্ড (বাকি ডিজাইন আগের মতোই) */
+.info-section {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    height: 80vh;
+    background: white;
+    z-index: 10;
+    border-radius: 30px 30px 0 0;
+    padding: 30px;
+    transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.3);
+    overflow-y: auto;
+    color: #333;
+}
+
+.info-section.active { bottom: 0; }
+.card { background: #b6f0ae; padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 5px solid #2ecc71; }
+.ai-input { width: 100%; padding: 12px; margin: 10px 0; border: 2px solid #eee; border-radius: 10px; outline: none; }
+.ai-btn { width: 100%; padding: 15px; background: #2ecc71; color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; }
 
 /* টপ নেভিগেশন ও লগইন বাটন */
 .top-nav {
@@ -135,33 +200,18 @@ body {
 }
 
 .auth-btn {
-    padding: 8px 18px;
-    background: #27ae60;
-    color: white;
+    padding: 10px 20px;
+    background: rgba(78, 190, 30, 0.596);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(56, 141, 16, 0.3);
+    color: rgb(255, 255, 255);
     border-radius: 50px;
-    border: none;
     cursor: pointer;
     font-weight: bold;
     transition: 0.3s;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-.auth-btn:hover { background: #2ecc71; }
-
-/* ৭. ইনফো প্যানেল ডিজাইন */
-.info-section {
-    position: fixed;
-    bottom: -100%;
-    left: 0;
-    width: 100%;
-    height: 85vh;
-    background: #fdfdfd;
-    z-index: 100;
-    border-radius: 30px 30px 0 0;
-    padding: 25px;
-    transition: 0.5s ease;
-    box-shadow: 0 -10px 40px rgba(0,0,0,0.4);
-    overflow-y: auto;
+.auth-btn:hover {
+    background: #67c528; /* লগআউট মুডে গেলে লাল রঙ হতে পারে */
+    border-color: #6df32e;
 }
-
-.info-section.active { bottom: 0; }

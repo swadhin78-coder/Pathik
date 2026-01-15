@@ -10,7 +10,7 @@ body {
 .hero-container {
     height: 100vh;
     width: 100%;
-    background-image: url("assest/image/ChatGPT Image Jan 14, 2026, 07_26_13 PM.png"); 
+    background-image: url("https://github.com/swadhin78-coder/Pathik/blob/main/assest/image/ChatGPT%20Image%20Jan%2014%2C%202026%2C%2007_26_13%20PM.png"); 
     background-size: cover;
     background-position: center;
     position: relative;
@@ -25,32 +25,6 @@ body {
     width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.4); 
 }
-
-.hero-container {
-    height: 100vh;
-    width: 100%;
-    /* পাথ আপডেট করা হয়েছে এবং স্পেস সম্বলিত নাম ঠিকভাবে হ্যান্ডেল করা হয়েছে */
-    background-image: url("/assest/image/ChatGPT Image Jan 14, 2026, 07_26_13 PM.png"); 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #000; /* ইমেজ লোড না হওয়া পর্যন্ত কালো দেখাবে */
-}
-/* মোবাইলে যাতে কন্টেন্ট ঠিক থাকে */
-@media (max-width: 768px) {
-    body {
-        overflow-y: auto; /* মোবাইলে স্ক্রল করার সুবিধা দিন */
-    }
-    .hero-container {
-        height: auto;
-        min-height: 100vh;
-    }
-}
-
 .main-logo {
     width: 90%;
     max-width: 500px;
@@ -215,3 +189,4 @@ body {
     background: #67c528; /* লগআউট মুডে গেলে লাল রঙ হতে পারে */
     border-color: #6df32e;
 }
+

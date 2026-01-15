@@ -56,31 +56,33 @@ const travelData = {
     ]
 };
 
-// ২. অথেন্টিকেশন লজিক
 let isLoggedIn = false;
 
-function toggleAuth() {
+// ২. অ্যাপ শুরু করার ফাংশন (লগইন বাটন ক্লিক করলে)
+function startApp() {
+    isLoggedIn = true;
+    document.getElementById('login-overlay').style.display = 'none';
     const authBtn = document.getElementById('auth-btn');
-    
-    if (!isLoggedIn) {
-        isLoggedIn = true;
+    if(authBtn) {
         authBtn.innerText = "Logout";
         authBtn.style.background = "rgba(231, 76, 60, 0.5)";
-        alert("সফলভাবে লগইন হয়েছে!");
-        getUserLocation(); // লগইন করলেই লোকেশন চাইবে
-    } else {
+    }
+    alert("সফলভাবে লগইন হয়েছে!");
+    getUserLocation(); // প্রবেশের সাথে সাথে লোকেশন চাইবে
+}
+
+// ৩. লগআউট ফাংশন
+function toggleAuth() {
+    if (isLoggedIn) {
         isLoggedIn = false;
-        authBtn.innerText = "Login";
-        authBtn.style.background = "rgba(255, 255, 255, 0.2)";
-        alert("লগআউট হয়েছে!");
-        hideSection();
+        location.reload(); // লগআউট করলে পেজ রিলোড হয়ে আবার লগইন স্ক্রিন আসবে
     }
 }
 
-// ৩. মূল ফাংশন (সেকশন দেখানোর জন্য - একটিই ফাংশন থাকবে)
+// ৪. মূল ফাংশন (সেকশন দেখানো - এটি মাত্র একবারই থাকবে)
 function showSection(type) {
     if (!isLoggedIn) {
-        alert("দয়া করে আগে লগইন করুন!");
+        alert("দয়া করে আগে লগইন করুন!");
         return;
     }
 
@@ -92,13 +94,13 @@ function showSection(type) {
         content.innerHTML = `
             <h2 style="color: #2ecc71;">💰 বাজেট প্ল্যানার</h2>
             <div class="card">
-                <input type="text" id="userPlace" placeholder="কোথায় যেতে চান? (সিলেট, সাজেক)" class="ai-input">
-                <input type="number" id="userBudget" placeholder="বাজেট কত? (টাকা)" class="ai-input">
+                <input type="text" id="userPlace" placeholder="কোথায় যাবেন? (সিলেট, কক্সবাজার)" class="ai-input">
+                <input type="number" id="userBudget" placeholder="বাজেট কত?" class="ai-input">
                 <button onclick="generateAIPlan()" class="ai-btn">প্ল্যান তৈরি করো ✨</button>
             </div>
             <div id="ai-result"></div>
         `;
-    }else if (type === 'places') {
+    } else if (type === 'places') {
         content.innerHTML = `
             <h2 style="color: #2ecc71; margin-bottom: 20px;">🏔️ বর্তমানের সেরা জায়গা</h2>
             
@@ -169,46 +171,27 @@ function showSection(type) {
     }
 }
 
-// ৪. এআই প্ল্যান তৈরি
+// ৫. এআই প্ল্যান জেনারেটর
 function generateAIPlan() {
     const placeInput = document.getElementById('userPlace').value.trim();
     const budget = parseInt(document.getElementById('userBudget').value);
     const resultDiv = document.getElementById('ai-result');
 
     if (!placeInput || !budget) {
-        alert("দয়া করে জায়গা এবং বাজেট সঠিকভাবে লিখুন!");
+        alert("তথ্য সঠিকভাবে দিন!");
         return;
     }
 
-    resultDiv.innerHTML = "<p style='text-align:center;'>হিসাব হচ্ছে...</p>";
-
-    setTimeout(() => {
-        let foundPlans = travelData[placeInput];
-        if (foundPlans) {
-            let matchedPlan = foundPlans.find(p => budget >= p.minBudget && budget <= p.maxBudget);
-            if (matchedPlan) {
-                resultDiv.innerHTML = `
-                    <div class="card" style="border: 2px solid #2ecc71; background: #f9fffb;">
-                        <h4 style="color:#2ecc71">✅ পথিক সাজেস্ট করছে (${matchedPlan.type})</h4>
-                        <p style="margin-top:10px;">${matchedPlan.plan}</p>
-                    </div>`;
-            } else {
-                resultDiv.innerHTML = `<div class="card"><p>এই বাজেটে কোনো প্ল্যান নেই।</p></div>`;
-            }
+    let foundPlans = travelData[placeInput];
+    if (foundPlans) {
+        let matched = foundPlans.find(p => budget >= p.minBudget && budget <= p.maxBudget);
+        if (matched) {
+            resultDiv.innerHTML = `<div class="card"><h4>${matched.type} Plan</h4><p>${matched.plan}</p></div>`;
         } else {
-            resultDiv.innerHTML = `<div class="card"><p>তথ্য পাওয়া যায়নি।।</p></div>`;
+            resultDiv.innerHTML = `<div class="card"><p>এই বাজেটে কোনো প্ল্যান নেই।</p></div>`;
         }
-    }, 1000);
-}
-
-// ৫. লোকেশন ও ইউটিলিটি
-function getUserLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((pos) => {
-            console.log("Location found:", pos.coords.latitude);
-        }, (err) => {
-            console.error("Location error:", err.message);
-        });
+    } else {
+        resultDiv.innerHTML = `<div class="card"><p>তথ্য পাওয়া যায়নি।</p></div>`;
     }
 }
 
@@ -216,3 +199,13 @@ function hideSection() {
     document.getElementById('info-display').classList.remove('active');
 }
 
+// ৬. লোকেশন সার্ভিস
+function getUserLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((pos) => {
+            console.log("Location obtained");
+        }, (err) => {
+            console.error("Location denied");
+        });
+    }
+}

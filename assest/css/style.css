@@ -10,7 +10,7 @@ body {
 .hero-container {
     height: 100vh;
     width: 100%;
-    background-image: url("assest/image/ChatGPT Image Jan 14, 2026, 07_26_13 PM.png"); 
+    background-image: url("assest/image/ChatGPT%20Image%20Jan%2014%2C%202026%2C%2007_26_13%20PM.png"); 
     background-size: cover;
     background-position: center;
     position: relative;
@@ -249,3 +249,4 @@ body {
     font-weight: bold;
     cursor: pointer;
 }
+
